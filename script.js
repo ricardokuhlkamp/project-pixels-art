@@ -61,25 +61,25 @@ window.onload = function(){
   function quadrados(){
     const divContainerQuadrados = document.createElement('div');
     getBody.appendChild(divContainerQuadrados);
-    divContainerQuadrados.style.width = '300px';
-    divContainerQuadrados.style.height = '300px';
+    divContainerQuadrados.style.width = '240px';
+    //divContainerQuadrados.style.height = '200px';
     divContainerQuadrados.setAttribute('id', 'pixel-board');
     for (let index = 0; index < 5; index += 1) {
       const divPixel = document.createElement('div');
       divContainerQuadrados.appendChild(divPixel);
-      divPixel.style.width = '50px';
-      divPixel.style.height = '50px';
+      divPixel.style.width = '40px';
+      divPixel.style.height = '40px';
       divPixel.style.border = '1px solid black';
       divPixel.style.display = 'inline-block';
       divPixel.setAttribute('class', 'pixel');
       divPixel.style.backgroundColor = "white";
       for (let index2 = 0; index2 < 4; index2 += 1) {
         const divPixel = document.createElement('div'); 
-        divPixel.style.width = '50px';
+        divPixel.style.width = '40px';
         divPixel.style.border = '1px solid black';
         divContainerQuadrados.appendChild(divPixel);
         divPixel.style.display = 'inline-block';
-        divPixel.style.height = '50px';
+        divPixel.style.height = '40px';
         divPixel.setAttribute('class', 'pixel');
         divPixel.style.backgroundColor = "white";
       };      
