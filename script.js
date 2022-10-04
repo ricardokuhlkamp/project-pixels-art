@@ -13,13 +13,15 @@ window.onload = function(){
     const criaDivPaleta = document.createElement('div');
     getBody.appendChild(criaDivPaleta);
     criaDivPaleta.setAttribute('id', 'color-palette');
+    criaDivPaleta.style.width = '100px';
+    criaDivPaleta.style.height = '25px';
     for (let index = 0; index < 4; index += 1) {
       const divInterna = document.createElement('div');
       criaDivPaleta.appendChild(divInterna);
-      divInterna.classList.add('color');
+      divInterna.setAttribute('class', 'color');
       divInterna.style.border = "solid 1px black";
       divInterna.style.width = '20px';
-      divInterna.style.height = '20px'
+      divInterna.style.height = '20px';
     }
     criaDivPaleta.style.display = 'flex';
     
@@ -48,14 +50,56 @@ window.onload = function(){
         let g = Math.floor(Math.random() * 256);
         let b = Math.floor(Math.random() * 256);
         listaCoresPaleta[index].style.backgroundColor = `rgb(${r},${g},${b})`;
-        console.log(listaCoresPaleta[index].style.backgroundColor);
+        let cor = listaCoresPaleta[index].style.backgroundColor;
+        //console.log(cor);
       };
+      let armazenaCor = document.querySelector('#color-palette');
+      localStorage.setItem('colorPalette', armazenaCor.innerHTML);
     })
   }
+
+  function quadrados(){
+    const divContainerQuadrados = document.createElement('div');
+    getBody.appendChild(divContainerQuadrados);
+    divContainerQuadrados.style.width = '300px';
+    divContainerQuadrados.style.height = '300px';
+    divContainerQuadrados.setAttribute('id', 'pixel-board');
+    for (let index = 0; index < 5; index += 1) {
+      const divPixel = document.createElement('div');
+      divContainerQuadrados.appendChild(divPixel);
+      divPixel.style.width = '50px';
+      divPixel.style.height = '50px';
+      divPixel.style.border = '1px solid black';
+      divPixel.style.display = 'inline-block';
+      divPixel.setAttribute('class', 'pixel');
+      divPixel.style.backgroundColor = "white";
+      for (let index2 = 0; index2 < 5; index2 += 1) {
+        const divPixel = document.createElement('div'); 
+        divPixel.style.width = '50px';
+        divPixel.style.border = '1px solid black';
+        divContainerQuadrados.appendChild(divPixel);
+        divPixel.style.display = 'inline-block';
+        divPixel.style.height = '50px';
+        divPixel.setAttribute('class', 'pixel');
+        divPixel.style.backgroundColor = "white";
+      };      
+    };    
+  };
+
+
+  //--------------Resgatando do LocalStorage---------------
+  function resgataLocalStorage(){
+    let armazenaCor = document.querySelector('#color-palette');
+    let coresPaleta = localStorage.getItem('colorPalette');
+    //armazenaCor.innerHTML = coresPaleta;
+    console.log(armazenaCor.innerHTML);    
+  };
   //-----------------Chamando as Funções-------------------
   criaH1Title();
   criaPaletaDeCores();
   criaCoresNaPaleta();
   geraCoresAleatorias();
-  //--------------Resgatando do LocalStorage---------------
+  quadrados();
+  resgataLocalStorage();
+
 }
