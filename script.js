@@ -73,7 +73,7 @@ window.onload = function(){
       divPixel.style.display = 'inline-block';
       divPixel.setAttribute('class', 'pixel');
       divPixel.style.backgroundColor = "white";
-      for (let index2 = 0; index2 < 5; index2 += 1) {
+      for (let index2 = 0; index2 < 4; index2 += 1) {
         const divPixel = document.createElement('div'); 
         divPixel.style.width = '50px';
         divPixel.style.border = '1px solid black';
