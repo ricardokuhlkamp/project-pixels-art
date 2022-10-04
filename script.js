@@ -31,10 +31,31 @@ window.onload = function(){
     listaCoresPaleta[1].style.backgroundColor = 'red';
     listaCoresPaleta[2].style.backgroundColor = 'green';
     listaCoresPaleta[3].style.backgroundColor = 'blue';    
+  };
+
+  function geraCoresAleatorias(){
+    const divBtnCoresleatorias = document.createElement('div');
+    getBody.appendChild(divBtnCoresleatorias);
+    const btnCoresAleatorias = document.createElement('button');
+    divBtnCoresleatorias.appendChild(btnCoresAleatorias);
+    btnCoresAleatorias.innerText = 'Cores aleatórias';
+    btnCoresAleatorias.setAttribute('id', 'button-random-color');
+
+    btnCoresAleatorias.addEventListener('click', function(){
+      let listaCoresPaleta = document.querySelectorAll(".color");
+      for (let index = 1; index < listaCoresPaleta.length; index += 1) {
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        listaCoresPaleta[index].style.backgroundColor = `rgb(${r},${g},${b})`;
+        console.log(listaCoresPaleta[index].style.backgroundColor);
+      };
+    })
   }
   //-----------------Chamando as Funções-------------------
   criaH1Title();
   criaPaletaDeCores();
   criaCoresNaPaleta();
+  geraCoresAleatorias();
   //--------------Resgatando do LocalStorage---------------
 }
