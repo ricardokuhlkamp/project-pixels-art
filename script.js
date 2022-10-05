@@ -18,14 +18,18 @@ window.onload = function(){
     for (let index = 0; index < 4; index += 1) {
       const divInterna = document.createElement('div');
       criaDivPaleta.appendChild(divInterna);
-      divInterna.setAttribute('class', 'color');
+      divInterna.classList.add('color');
       divInterna.style.border = "solid 1px black";
       divInterna.style.width = '20px';
       divInterna.style.height = '20px';
     }
-    criaDivPaleta.style.display = 'flex';
-    
+    criaDivPaleta.style.display = 'flex';    
   };
+
+  function criaClasseParaCadaPaleta(){
+    let getDivsInternas = document.querySelector('.color');
+    getDivsInternas.classList.add('selected');
+  }
 
   function criaCoresNaPaleta(){
     let listaCoresPaleta = document.querySelectorAll(".color");
@@ -97,6 +101,7 @@ window.onload = function(){
   //-----------------Chamando as Funções-------------------
   criaH1Title();
   criaPaletaDeCores();
+  criaClasseParaCadaPaleta()
   criaCoresNaPaleta();
   geraCoresAleatorias();
   quadrados();
