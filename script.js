@@ -27,12 +27,17 @@ window.onload = function () {
       divInterna.style.border = "solid 1px black";
       divInterna.style.width = '20px';
       divInterna.style.height = '20px';
-    }
+    };
     criaDivPaleta.style.display = 'flex';
-    //5 armazenar todos os elementos no local storage
-    let armazenaCor = document.querySelector('#color-palette').innerHTML;
-    localStorage.setItem('colorPalette', armazenaCor);
+    
   };
+
+  function webStorage() {
+    //5 armazenar todos os elementos no local storage
+    let armazenaCor = JSON.stringify(document.querySelector('#color-palette'));    
+    localStorage.setItem('colorPalette', armazenaCor);
+    console.log('webstorage: ', armazenaCor)
+  }
 
   //3 - Adicione a cor preta como a primeira cor da paleta de cores.
   //8 - Defina a cor preta como cor inicial da paleta de cores
@@ -71,8 +76,8 @@ window.onload = function () {
       //5. LocalSTORAGE
       let armazenaCor = document.querySelector('#color-palette');
       localStorage.setItem('colorPalette', armazenaCor.innerHTML);
-    })
-  }
+    });
+  };
 
   //6 - Adicione à página um quadro contendo 25 pixels.
   //7 - Faça com que cada pixel do quadro tenha largura e altura de 40 pixels e borda preta de 1 pixel de espessura.
@@ -152,7 +157,7 @@ window.onload = function () {
 
     if (localStorage.length !== 0) {
     let armazenaCor = document.querySelector('#color-palette');
-    let coresPaleta = localStorage.getItem('colorPalette');
+    let coresPaleta = JSON.parse(localStorage.getItem('colorPalette'));
     armazenaCor.innerHTML = coresPaleta;
     }
 
@@ -160,6 +165,7 @@ window.onload = function () {
   };
   //-----------------Chamando as Funções-------------------
   //criaH1Title();
+  webStorage();
   resgataLocalStorage();
   criaPaletaDeCores();
   criaClasseParaCadaPaleta()
