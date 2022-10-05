@@ -56,7 +56,7 @@ window.onload = function () {
     getBody.appendChild(divContainerQuadrados);
     divContainerQuadrados.style.width = '240px';
     //divContainerQuadrados.style.height = '200px';
-    divContainerQuadrados.setAttribute('id', 'pixel-board');
+    divContainerQuadrados.setAttribute('id', 'pixel-board');    
     for (let index = 0; index < 5; index += 1) {
       const divPixel = document.createElement('div');
       divContainerQuadrados.appendChild(divPixel);
@@ -104,12 +104,29 @@ window.onload = function () {
       };
     });
   };
-  /*
-  let arrayColorsQuadrados = [];
-  for (let index = 0; index < array.length; index++) {
-    const element = array[index];
+
+  //11 - Crie um botão que retorne a cor do quadro para a cor inicial.
+
+  function criaButtonClearBoard() {
     
-  }*/
+    const divClearBoard = document.createElement('div');
+    getBody.appendChild(divClearBoard);
+    const btnClearBoard = document.createElement('button');
+    divClearBoard.appendChild(btnClearBoard);
+    btnClearBoard.innerText = 'Limpar';
+    btnClearBoard.setAttribute('id', 'clear-board');
+    //return btnClearBoard;
+  };
+
+  function clearBoard() {
+      let button = document.querySelector('#clear-board');
+      button.addEventListener('click', function(){
+        let getBoard = document.querySelectorAll('.pixel');
+        for (let index = 0; index < getBoard.length; index += 1) {
+          getBoard[index].style.backgroundColor = 'white';          
+        };
+      });     
+    }
 
   //------------Chamando as Funções-------------------
 
@@ -117,7 +134,9 @@ window.onload = function () {
   criaClasseParaCadaPaleta();
   criaCoresNaPaleta();
   geraCoresAleatorias();
+  criaButtonClearBoard();
   quadrados();
+  clearBoard();
   selecionarCorDaPaletta();
   pintar();
   checaResgataLocalStorage();
@@ -136,8 +155,7 @@ function checaResgataLocalStorage() {
   if (localStorage.getItem('colorPalette')) {
   let armazenaCor = document.querySelector('#color-palette');
   let coresPaleta = localStorage.getItem('colorPalette');
-  armazenaCor.innerHTML = coresPaleta;
-  console.log(coresPaleta);    
+  armazenaCor.innerHTML = coresPaleta;    
   }  
 };
 
