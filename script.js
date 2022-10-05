@@ -4,19 +4,22 @@ window.onload = function () {
   //------------------------Funções------------------------
 
   //1 - Adicione à página o título "Paleta de Cores".
-  function criaH1Title() {
-    const criaH1 = document.createElement('h1');
-    criaH1.setAttribute('id', 'title');
-    getBody.appendChild(criaH1);
-    criaH1.innerText = 'Paleta de Cores';
-  };
+  //function criaH1Title() {
+    //const criaH1 = document.createElement('h1');
+    //criaH1.setAttribute('id', 'title');
+    //getBody.appendChild(criaH1);
+    //criaH1.innerText = 'Paleta de Cores';
+    //let armazenaH1 = document.querySelector('#title').innerHTML;
+    //localStorage.setItem('keyH1', armazenaH1);
+  //};
   //2 - Adicione à página uma paleta contendo quatro cores distintas.
   function criaPaletaDeCores() {
-    const criaDivPaleta = document.createElement('div');
-    getBody.appendChild(criaDivPaleta);
-    criaDivPaleta.setAttribute('id', 'color-palette');
-    criaDivPaleta.style.width = '100px';
-    criaDivPaleta.style.height = '25px';
+    const criaDivPaleta = document.querySelector('#color-palette');
+    //const criaDivPaleta = document.createElement('div');
+    //getBody.appendChild(criaDivPaleta);
+    //criaDivPaleta.setAttribute('id', 'color-palette');
+    //criaDivPaleta.style.width = '100px';
+    //criaDivPaleta.style.height = '25px';
     for (let index = 0; index < 4; index += 1) {
       const divInterna = document.createElement('div');
       criaDivPaleta.appendChild(divInterna);
@@ -26,9 +29,9 @@ window.onload = function () {
       divInterna.style.height = '20px';
     }
     criaDivPaleta.style.display = 'flex';
-    //armazenartodos os elementos no local storage
-    //let armazenaCor = document.querySelector('#color-palette');
-    //localStorage.setItem('colorPalette', armazenaCor);
+    //5 armazenar todos os elementos no local storage
+    let armazenaCor = document.querySelector('#color-palette').innerHTML;
+    localStorage.setItem('colorPalette', armazenaCor);
   };
 
   //3 - Adicione a cor preta como a primeira cor da paleta de cores.
@@ -127,16 +130,14 @@ window.onload = function () {
     
     let getDivBoard = document.querySelector('#pixel-board');
     getDivBoard.addEventListener('click', function (event) {
-      let selecionado = document.querySelector('.selected');
-      
-      let bkgColor = selecionado.style.backgroundColor;
-        
+      let selecionado = document.querySelector('.selected');      
+      let bkgColor = selecionado.style.backgroundColor;        
         if (event.target.className === 'pixel') {
           event.target.style.backgroundColor = bkgColor;
         }
       console.log(event.target.className === 'pixel');
     });
-  }
+  };
 
 
 
@@ -144,13 +145,22 @@ window.onload = function () {
   //--------------Resgatando do LocalStorage---------------
   //5 - Implemente uma função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página.
   function resgataLocalStorage() {
+    //let armazenaH1 = document.querySelector('#title');
+    //console.log(armazenaH1)
+    //let tituloDoH1 = JSON.parse(localStorage.getItem('#title'));
+    //armazenaH1,innerHTML =tituloDoH1;
+
+    if (localStorage.length !== 0) {
     let armazenaCor = document.querySelector('#color-palette');
-    let coresPaleta = JSON.parse(localStorage.getItem('colorPalette'));
-    //armazenaCor.innerHTML = coresPaleta;
-    console.log('coresPaleta: ',coresPaleta);    
+    let coresPaleta = localStorage.getItem('colorPalette');
+    armazenaCor.innerHTML = coresPaleta;
+    }
+
+    //console.log('coresPaleta: ',coresPaleta);    
   };
   //-----------------Chamando as Funções-------------------
-  criaH1Title();
+  //criaH1Title();
+  resgataLocalStorage();
   criaPaletaDeCores();
   criaClasseParaCadaPaleta()
   criaCoresNaPaleta();
@@ -159,7 +169,7 @@ window.onload = function () {
   selecionarCorDaPaletta();
   pintar();
   
-  resgataLocalStorage();
+  
 
 
 }
