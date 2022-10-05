@@ -90,17 +90,39 @@ window.onload = function () {
     };
   };
 
-  function sele() {
+  function selecionarCorDaPaletta() {
     let divPixel = document.getElementById('color-palette');
     let listaCoresPaleta = document.querySelectorAll(".color");
     divPixel.addEventListener('click', function (event) {
       for (let index = 0; index < listaCoresPaleta.length; index += 1) {
         listaCoresPaleta[index].setAttribute('class', 'color');
-        console.log(listaCoresPaleta[index]);
+        //console.log(listaCoresPaleta[index]);
       }
       event.target.classList.add('selected');
-      console.log(event.target);
+      console.log('função sele(): ', event.target.className);
+      //console.log('função sele(): ',event.target.style.backgroundColor);
     });
+
+  };
+
+  function pintar() {
+    let selecionado = document.querySelectorAll('.selected');
+    console.log('função pintar(): ', selecionado);
+    let getDivBoard = document.querySelector('#pixel-board');
+    getDivBoard, addEventListener('click', function (event) {
+
+      for (let index = 0; index < selecionado.length; index += 1) {
+        let bkgColor = selecionado[index].style.backgroundColor;
+        console.log('função pintar() no adddEventListener e for: ',selecionado[index].className); 
+        if (event.target.className === 'pixel') {
+          event.target.style.backgroundColor = bkgColor;
+        }
+
+      }
+
+
+      //console.log(event.target.className === 'pixel')
+    })
   }
 
 
@@ -120,7 +142,8 @@ window.onload = function () {
   criaCoresNaPaleta();
   geraCoresAleatorias();
   quadrados();
-  sele();
+  selecionarCorDaPaletta();
+  pintar();
   resgataLocalStorage();
 
 
