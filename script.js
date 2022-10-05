@@ -1,15 +1,15 @@
-window.onload = function(){
+window.onload = function () {
   //-----------------Variáveis Globais.....................
   const getBody = document.body;
   //------------------------Funções------------------------
-  function criaH1Title(){    
+  function criaH1Title() {
     const criaH1 = document.createElement('h1');
     criaH1.setAttribute('id', 'title');
     getBody.appendChild(criaH1);
     criaH1.innerText = 'Paleta de Cores';
   };
 
-  function criaPaletaDeCores(){
+  function criaPaletaDeCores() {
     const criaDivPaleta = document.createElement('div');
     getBody.appendChild(criaDivPaleta);
     criaDivPaleta.setAttribute('id', 'color-palette');
@@ -23,23 +23,23 @@ window.onload = function(){
       divInterna.style.width = '20px';
       divInterna.style.height = '20px';
     }
-    criaDivPaleta.style.display = 'flex';    
+    criaDivPaleta.style.display = 'flex';
   };
 
-  function criaClasseParaCadaPaleta(){
+  function criaClasseParaCadaPaleta() {
     let getDivsInternas = document.querySelector('.color');
     getDivsInternas.classList.add('selected');
   }
 
-  function criaCoresNaPaleta(){
+  function criaCoresNaPaleta() {
     let listaCoresPaleta = document.querySelectorAll(".color");
     listaCoresPaleta[0].style.backgroundColor = 'black';
     listaCoresPaleta[1].style.backgroundColor = 'red';
     listaCoresPaleta[2].style.backgroundColor = 'green';
-    listaCoresPaleta[3].style.backgroundColor = 'blue';    
+    listaCoresPaleta[3].style.backgroundColor = 'blue';
   };
 
-  function geraCoresAleatorias(){
+  function geraCoresAleatorias() {
     const divBtnCoresleatorias = document.createElement('div');
     getBody.appendChild(divBtnCoresleatorias);
     const btnCoresAleatorias = document.createElement('button');
@@ -47,7 +47,7 @@ window.onload = function(){
     btnCoresAleatorias.innerText = 'Cores aleatórias';
     btnCoresAleatorias.setAttribute('id', 'button-random-color');
 
-    btnCoresAleatorias.addEventListener('click', function(){
+    btnCoresAleatorias.addEventListener('click', function () {
       let listaCoresPaleta = document.querySelectorAll(".color");
       for (let index = 1; index < listaCoresPaleta.length; index += 1) {
         let r = Math.floor(Math.random() * 256);
@@ -62,7 +62,7 @@ window.onload = function(){
     })
   }
 
-  function quadrados(){
+  function quadrados() {
     const divContainerQuadrados = document.createElement('div');
     getBody.appendChild(divContainerQuadrados);
     divContainerQuadrados.style.width = '240px';
@@ -78,7 +78,7 @@ window.onload = function(){
       divPixel.setAttribute('class', 'pixel');
       divPixel.style.backgroundColor = "white";
       for (let index2 = 0; index2 < 4; index2 += 1) {
-        const divPixel = document.createElement('div'); 
+        const divPixel = document.createElement('div');
         divPixel.style.width = '40px';
         divPixel.style.border = '1px solid black';
         divContainerQuadrados.appendChild(divPixel);
@@ -86,17 +86,32 @@ window.onload = function(){
         divPixel.style.height = '40px';
         divPixel.setAttribute('class', 'pixel');
         divPixel.style.backgroundColor = "white";
-      };      
-    };    
+      };
+    };
   };
+
+  function sele() {
+    let divPixel = document.getElementById('color-palette');
+    let listaCoresPaleta = document.querySelectorAll(".color");
+    divPixel.addEventListener('click', function (event) {
+      for (let index = 0; index < listaCoresPaleta.length; index += 1) {
+        listaCoresPaleta[index].setAttribute('class', 'color');
+        console.log(listaCoresPaleta[index]);
+      }
+      event.target.classList.add('selected');
+      console.log(event.target);
+    });
+  }
+
+
 
 
   //--------------Resgatando do LocalStorage---------------
-  function resgataLocalStorage(){
+  function resgataLocalStorage() {
     let armazenaCor = document.querySelector('#color-palette');
     let coresPaleta = localStorage.getItem('colorPalette');
     //armazenaCor.innerHTML = coresPaleta;
-    console.log(armazenaCor.innerHTML);    
+    //console.log(armazenaCor.innerHTML);    
   };
   //-----------------Chamando as Funções-------------------
   criaH1Title();
@@ -105,6 +120,9 @@ window.onload = function(){
   criaCoresNaPaleta();
   geraCoresAleatorias();
   quadrados();
+  sele();
   resgataLocalStorage();
 
+
 }
+
