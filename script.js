@@ -27,6 +27,8 @@ window.onload = function () {
     }
     criaDivPaleta.style.display = 'flex';
     //armazenartodos os elementos no local storage
+    //let armazenaCor = document.querySelector('#color-palette');
+    //localStorage.setItem('colorPalette', armazenaCor);
   };
 
   //3 - Adicione a cor preta como a primeira cor da paleta de cores.
@@ -65,7 +67,7 @@ window.onload = function () {
       };
       //5. LocalSTORAGE
       let armazenaCor = document.querySelector('#color-palette');
-      localStorage.setItem('colorPalette', armazenaCor);
+      localStorage.setItem('colorPalette', armazenaCor.innerHTML);
     })
   }
 
