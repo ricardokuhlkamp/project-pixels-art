@@ -110,9 +110,11 @@ window.onload = function () {
     console.log('função pintar(): ', selecionado);
     let getDivBoard = document.querySelector('#pixel-board');
     getDivBoard, addEventListener('click', function (event) {
-
+      
       for (let index = 0; index < selecionado.length; index += 1) {
         let bkgColor = selecionado[index].style.backgroundColor;
+        let classe = selecionado[index].className;
+        console.log('classe: ', classe)
         console.log('função pintar() no adddEventListener e for: ',selecionado[index].className); 
         if (event.target.className === 'pixel') {
           event.target.style.backgroundColor = bkgColor;
