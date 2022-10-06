@@ -60,7 +60,7 @@ window.onload = function () {
     for (let index = 0; index < 5; index += 1) {
       const divPixel = document.createElement('div');
       divContainerQuadrados.appendChild(divPixel);
-      divPixel.style.width = '40px';
+      divPixel.style.width = '40px'; 
       divPixel.style.height = '40px';
       divPixel.style.border = '1px solid black';
       divPixel.style.display = 'inline-block';
@@ -82,13 +82,10 @@ window.onload = function () {
   function selecionarCorDaPaletta() {
     let divPixel = document.getElementById('color-palette');
     let listaCoresPaleta = document.querySelectorAll(".color");
-    divPixel.addEventListener('click', function (event) {
-      for (let index = 0; index < listaCoresPaleta.length; index += 1) {
-        listaCoresPaleta[index].setAttribute('class', 'color');
-        //console.log(listaCoresPaleta[index]);
-      }
-      event.target.classList.add('selected');
-      
+    divPixel.addEventListener('click', function (event) {      
+      const selected = document.querySelector('.selected');
+      selected.classList.remove('selected');
+      event.target.classList.add('selected');      
     });
   };
   //10 - Crie uma função que permita preencher um pixel do quadro com a cor selecionada na paleta de cores.
@@ -113,6 +110,7 @@ window.onload = function () {
   function criaButtonClearBoard() {
     
     const divClearBoard = document.createElement('div');
+    divClearBoard.setAttribute('id', 'div-clear-board');//<<--TEXTO NOVO.....para requisito bonus 11.   
     getBody.appendChild(divClearBoard);
     const btnClearBoard = document.createElement('button');
     divClearBoard.appendChild(btnClearBoard);
@@ -128,8 +126,29 @@ window.onload = function () {
         for (let index = 0; index < getBoard.length; index += 1) {
           getBoard[index].style.backgroundColor = 'white';          
         };
+        let getPixelBoard = document.querySelector('#pixel-board');
+        localStorage.setItem('pixelBoard', getPixelBoard.innerHTML);
+        console.log('getClassPixel: ', getPixelBoard.innerHTML);
       });     
-    }
+    };
+    //TEXTO NOVO------------para requisito bonus 11
+
+    function criaInput() {
+      let getDivClearBoard = document.getElementById('div-clear-board');
+      const inputDimensao = document.createElement('input');
+      inputDimensao.setAttribute('id', 'board-size');
+      getDivClearBoard.appendChild(inputDimensao);
+      getDivClearBoard.appendChild(inputDimensao);
+      inputDimensao.style.width = '48px';
+    };
+
+    function criaButtonSize() {
+      let getDivClearBoard = document.getElementById('div-clear-board');
+      const buttonSize = document.createElement('button');
+      buttonSize.setAttribute('id', 'generate-board');
+      getDivClearBoard.appendChild(buttonSize);
+      buttonSize.innerText= 'VQV';
+    };
 
   //------------Chamando as Funções-------------------
 
@@ -140,6 +159,8 @@ window.onload = function () {
   criaButtonClearBoard();
   quadrados();
   clearBoard();
+  criaInput();//TEXTO NOVO.....para requisito bonus 11.
+  criaButtonSize();//TEXTO NOVO.....para requisito bonus 11.
   selecionarCorDaPaletta();
   pintar();
   checaResgataLocalStorage();
@@ -155,14 +176,17 @@ function checaResgataLocalStorage() {
     let armazenaCor = document.querySelector('#color-palette');
     let coresPaleta = localStorage.getItem('colorPalette');
     armazenaCor.innerHTML = coresPaleta;
-    //console.log(coresPaleta);    
+    //console.log(coresPaleta);
+    //selecionarCorDaPaletta()
     };
+    
 };
 function checaCorBoarderLocalStorage() { 
   if (localStorage.getItem('pixelBoard')) {
     let getPixelBoard = document.querySelector('#pixel-board');
     let coresBorder = localStorage.getItem('pixelBoard');
     getPixelBoard.innerHTML = coresBorder;
+    console.log(getPixelBoard.innerHTML);
        
     };
 };
