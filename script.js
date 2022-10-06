@@ -96,12 +96,15 @@ window.onload = function () {
     let getDivBoard = document.querySelector('#pixel-board');
     getDivBoard.addEventListener('click', function (event) {
       let selecionado = document.querySelector('.selected');
-      let bkgColor = selecionado.style.backgroundColor;
       if (event.target.className === 'pixel') {
+        let bkgColor = selecionado.style.backgroundColor;
         event.target.style.backgroundColor = bkgColor;
         //5. LocalSTORAGE manda os dados para o local storage
-        
+        console.log(event.target.style.backgroundColor);
       };
+      let getPixelBoard = document.querySelector('#pixel-board');//<<<<<<<<<<<<<<<<<<<<<<<<<<
+      localStorage.setItem('pixelBoard', getPixelBoard.innerHTML);
+      console.log('getClassPixel: ', getPixelBoard.innerHTML);
     });
   };
 
@@ -140,22 +143,26 @@ window.onload = function () {
   selecionarCorDaPaletta();
   pintar();
   checaResgataLocalStorage();
+  checaCorBoarderLocalStorage();
 
 }; // window.onLoad termina aqui
 
 //--------Resgatando do LocalStorage---------------
 //5 - Implemente uma função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página.
 
-function checaResgataLocalStorage() {
-  //let armazenaCor = document.querySelector('#color-palette');
-  //let coresPaleta = localStorage.getItem('colorPalette').innerHTML;
-  //armazenaCor = coresPaleta;
-  
-  
+function checaResgataLocalStorage() { 
   if (localStorage.getItem('colorPalette')) {
-  let armazenaCor = document.querySelector('#color-palette');
-  let coresPaleta = localStorage.getItem('colorPalette');
-  armazenaCor.innerHTML = coresPaleta;    
-  }  
+    let armazenaCor = document.querySelector('#color-palette');
+    let coresPaleta = localStorage.getItem('colorPalette');
+    armazenaCor.innerHTML = coresPaleta;
+    //console.log(coresPaleta);    
+    };
 };
-
+function checaCorBoarderLocalStorage() { 
+  if (localStorage.getItem('pixelBoard')) {
+    let getPixelBoard = document.querySelector('#pixel-board');
+    let coresBorder = localStorage.getItem('pixelBoard');
+    getPixelBoard.innerHTML = coresBorder;
+       
+    };
+};
