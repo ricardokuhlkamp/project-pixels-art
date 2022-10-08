@@ -90,7 +90,7 @@ window.onload = function () {
 
       let getInput = parseInt(document.getElementById('board-size').value);
       
-      if (getInput > 0) {
+      if (getInput > 5 && getInput <= 50) {
         for (const item of getAll) {
           item.remove();
         };
@@ -116,6 +116,40 @@ window.onload = function () {
           divPixel.setAttribute('class', 'pixel');
           divPixel.style.backgroundColor = "white";
           for (let index2 = 0; index2 < (numero - 1); index2 += 1) {
+            const divPixel = document.createElement('div');
+            divPixel.style.width = '40px';
+            divPixel.style.border = '1px solid black';
+            divQuadrados.appendChild(divPixel);
+            divPixel.style.display = 'inline-block';
+            divPixel.style.height = '40px';
+            divPixel.setAttribute('class', 'pixel');
+            divPixel.style.backgroundColor = "white";
+          };
+        };
+      } else if (getInput > 50){
+        for (const item of getAll) {
+          item.remove();
+        };
+  
+        divContainerQuadrados.remove();
+               
+        let larguraDivPai = 50 * (210 / 5)
+        
+        const divQuadrados = document.createElement('div');
+        getBody.appendChild(divQuadrados);
+        divQuadrados.style.width = `${larguraDivPai}px`;
+        divQuadrados.setAttribute('id', 'pixel-board');
+
+        for (let index = 0; index < 50; index += 1) {
+          const divPixel = document.createElement('div');
+          divQuadrados.appendChild(divPixel);
+          divPixel.style.width = '40px';
+          divPixel.style.height = '40px';
+          divPixel.style.border = '1px solid black';
+          divPixel.style.display = 'inline-block';
+          divPixel.setAttribute('class', 'pixel');
+          divPixel.style.backgroundColor = "white";
+          for (let index2 = 0; index2 < (50 - 1); index2 += 1) {
             const divPixel = document.createElement('div');
             divPixel.style.width = '40px';
             divPixel.style.border = '1px solid black';
