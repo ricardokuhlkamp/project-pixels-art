@@ -43,24 +43,29 @@ window.onload = function () {
         let r = Math.floor(Math.random() * 256);
         let g = Math.floor(Math.random() * 256);
         let b = Math.floor(Math.random() * 256);
-        listaCoresPaleta[index].style.backgroundColor = `rgb(${r},${g},${b})`;        
+        listaCoresPaleta[index].style.backgroundColor = `rgb(${r},${g},${b})`;
       };
       let armazenaCor = document.querySelector('#color-palette');
-        localStorage.setItem('colorPalette', armazenaCor.innerHTML);
+      localStorage.setItem('colorPalette', armazenaCor.innerHTML);
     });
   };
+
+
+
   //6 - Adicione à página um quadro contendo 25 pixels.
   //7 - Faça com que cada pixel do quadro tenha largura e altura de 40 pixels e borda preta de 1 pixel de espessura.
-  function quadrados() {
+  function criaGrid() {
+    // let number = recebeInput();
+    // console.log(number)
+    //let getContainerQuadrados = document.getElementById('pixel-board');
     const divContainerQuadrados = document.createElement('div');
     getBody.appendChild(divContainerQuadrados);
-    divContainerQuadrados.style.width = '240px';
-    //divContainerQuadrados.style.height = '200px';
-    divContainerQuadrados.setAttribute('id', 'pixel-board');    
+    divContainerQuadrados.style.width = '210px';
+    divContainerQuadrados.setAttribute('id', 'pixel-board');
     for (let index = 0; index < 5; index += 1) {
       const divPixel = document.createElement('div');
       divContainerQuadrados.appendChild(divPixel);
-      divPixel.style.width = '40px'; 
+      divPixel.style.width = '40px';
       divPixel.style.height = '40px';
       divPixel.style.border = '1px solid black';
       divPixel.style.display = 'inline-block';
@@ -77,22 +82,93 @@ window.onload = function () {
         divPixel.style.backgroundColor = "white";
       };
     };
+
+    const getBtnVqV = document.querySelector('#generate-board')
+    getBtnVqV.addEventListener('click', function () {
+      let divContainerQuadrados = document.getElementById('pixel-board');
+      let getAll = document.querySelectorAll('.pixel');
+
+      let getInput = parseInt(document.getElementById('board-size').value);
+      
+      if (getInput > 0) {
+        for (const item of getAll) {
+          item.remove();
+        };
+  
+        divContainerQuadrados.remove();
+        let numero = getInput;
+        
+        let larguraDivPai = numero * (210 / 5)
+        console.log(larguraDivPai)
+        console.log(getInput);
+        const divQuadrados = document.createElement('div');
+        getBody.appendChild(divQuadrados);
+        divQuadrados.style.width = `${larguraDivPai}px`;
+        divQuadrados.setAttribute('id', 'pixel-board');
+
+        for (let index = 0; index < numero; index += 1) {
+          const divPixel = document.createElement('div');
+          divQuadrados.appendChild(divPixel);
+          divPixel.style.width = '40px';
+          divPixel.style.height = '40px';
+          divPixel.style.border = '1px solid black';
+          divPixel.style.display = 'inline-block';
+          divPixel.setAttribute('class', 'pixel');
+          divPixel.style.backgroundColor = "white";
+          for (let index2 = 0; index2 < (numero - 1); index2 += 1) {
+            const divPixel = document.createElement('div');
+            divPixel.style.width = '40px';
+            divPixel.style.border = '1px solid black';
+            divQuadrados.appendChild(divPixel);
+            divPixel.style.display = 'inline-block';
+            divPixel.style.height = '40px';
+            divPixel.setAttribute('class', 'pixel');
+            divPixel.style.backgroundColor = "white";
+          };
+        };
+      } else {
+        alert('Board inválido!');
+      };
+    });
   };
+
+  // function quadrados() {
+
+
+  //   criaGrid();
+  // };
+
+  // function recebeInput() {
+  //   const getBtnVqV = document.getElementById('generate-board')
+  //   getBtnVqV.addEventListener('click', function() {
+  //     let getInput = parseInt(document.getElementById('board-size').value);
+  //     let numero = getInput;
+  //     // console.log(getInput);
+
+
+  //   })
+
+  // }
+
+
+
   //9 - Crie uma função para selecionar uma cor na paleta de cores e preencha os pixels no quadro.
   function selecionarCorDaPaletta() {
     let divPixel = document.getElementById('color-palette');
     let listaCoresPaleta = document.querySelectorAll(".color");
-    divPixel.addEventListener('click', function (event) {      
+    divPixel.addEventListener('click', function (event) {
       const selected = document.querySelector('.selected');
       selected.classList.remove('selected');
-      event.target.classList.add('selected');      
+      event.target.classList.add('selected');
     });
   };
   //10 - Crie uma função que permita preencher um pixel do quadro com a cor selecionada na paleta de cores.
   function pintar() {
     let getDivBoard = document.querySelector('#pixel-board');
+    console.log(getDivBoard)
     getDivBoard.addEventListener('click', function (event) {
       let selecionado = document.querySelector('.selected');
+      console.log(selecionado)
       if (event.target.className === 'pixel') {
         let bkgColor = selecionado.style.backgroundColor;
         event.target.style.backgroundColor = bkgColor;
@@ -108,7 +184,7 @@ window.onload = function () {
   //11 - Crie um botão que retorne a cor do quadro para a cor inicial.
 
   function criaButtonClearBoard() {
-    
+
     const divClearBoard = document.createElement('div');
     divClearBoard.setAttribute('id', 'div-clear-board');//<<--TEXTO NOVO.....para requisito bonus 11.   
     getBody.appendChild(divClearBoard);
@@ -120,35 +196,38 @@ window.onload = function () {
   };
 
   function clearBoard() {
-      let button = document.querySelector('#clear-board');
-      button.addEventListener('click', function(){
-        let getBoard = document.querySelectorAll('.pixel');
-        for (let index = 0; index < getBoard.length; index += 1) {
-          getBoard[index].style.backgroundColor = 'white';          
-        };
-        let getPixelBoard = document.querySelector('#pixel-board');
-        localStorage.setItem('pixelBoard', getPixelBoard.innerHTML);
-        console.log('getClassPixel: ', getPixelBoard.innerHTML);
-      });     
-    };
-    //TEXTO NOVO------------para requisito bonus 11
+    let button = document.querySelector('#clear-board');
+    button.addEventListener('click', function () {
+      let getBoard = document.querySelectorAll('.pixel');
+      for (let index = 0; index < getBoard.length; index += 1) {
+        getBoard[index].style.backgroundColor = 'white';
+      };
+      let getPixelBoard = document.querySelector('#pixel-board');
+      localStorage.setItem('pixelBoard', getPixelBoard.innerHTML);
+      console.log('getClassPixel: ', getPixelBoard.innerHTML);
+    });
+  };
+  //TEXTO NOVO------------para requisito bonus 11
 
-    function criaInput() {
-      let getDivClearBoard = document.getElementById('div-clear-board');
-      const inputDimensao = document.createElement('input');
-      inputDimensao.setAttribute('id', 'board-size');
-      getDivClearBoard.appendChild(inputDimensao);
-      getDivClearBoard.appendChild(inputDimensao);
-      inputDimensao.style.width = '48px';
-    };
+  function criaInput() {
+    let getDivClearBoard = document.getElementById('div-clear-board');
+    const inputDimensao = document.createElement('input');
+    inputDimensao.setAttribute('id', 'board-size');
+    getDivClearBoard.appendChild(inputDimensao);
+    getDivClearBoard.appendChild(inputDimensao);
+    inputDimensao.style.width = '48px';
+    inputDimensao.setAttribute('type', 'number');
+    inputDimensao.setAttribute('min', '1');
+    inputDimensao.setAttribute('max', '50');
+  };
 
-    function criaButtonSize() {
-      let getDivClearBoard = document.getElementById('div-clear-board');
-      const buttonSize = document.createElement('button');
-      buttonSize.setAttribute('id', 'generate-board');
-      getDivClearBoard.appendChild(buttonSize);
-      buttonSize.innerText= 'VQV';
-    };
+  function criaButtonSize() {
+    let getDivClearBoard = document.getElementById('div-clear-board');
+    const buttonSize = document.createElement('button');
+    buttonSize.setAttribute('id', 'generate-board');
+    getDivClearBoard.appendChild(buttonSize);
+    buttonSize.innerText = 'VQV';
+  };
 
   //------------Chamando as Funções-------------------
 
@@ -157,10 +236,13 @@ window.onload = function () {
   criaCoresNaPaleta();
   geraCoresAleatorias();
   criaButtonClearBoard();
-  quadrados();
-  clearBoard();
   criaInput();//TEXTO NOVO.....para requisito bonus 11.
   criaButtonSize();//TEXTO NOVO.....para requisito bonus 11.
+  // recebeInput();
+  //quadrados();
+  criaGrid();
+
+  clearBoard();
   selecionarCorDaPaletta();
   pintar();
   checaResgataLocalStorage();
@@ -171,22 +253,20 @@ window.onload = function () {
 //--------Resgatando do LocalStorage---------------
 //5 - Implemente uma função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página.
 
-function checaResgataLocalStorage() { 
+function checaResgataLocalStorage() {
   if (localStorage.getItem('colorPalette')) {
     let armazenaCor = document.querySelector('#color-palette');
     let coresPaleta = localStorage.getItem('colorPalette');
     armazenaCor.innerHTML = coresPaleta;
     //console.log(coresPaleta);
     //selecionarCorDaPaletta()
-    };
-    
+  };
+
 };
-function checaCorBoarderLocalStorage() { 
+function checaCorBoarderLocalStorage() {
   if (localStorage.getItem('pixelBoard')) {
     let getPixelBoard = document.querySelector('#pixel-board');
     let coresBorder = localStorage.getItem('pixelBoard');
     getPixelBoard.innerHTML = coresBorder;
-    console.log(getPixelBoard.innerHTML);
-       
-    };
+  };
 };
