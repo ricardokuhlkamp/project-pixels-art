@@ -68,6 +68,14 @@ function pixelByPixel(parameter) {
 
 
 
+function loadStorageBoard(parameter) {
+  divPixelBoard.innerHTML = parameter;
+}
+
+function loadStorageWidth(parameter) {
+  divPixelBoard.style.width = parameter;
+}
+
 function executeStorage() {
   if (localStorage.getItem('colorPalette')) {
     let loadColorsList = JSON.parse(localStorage.getItem('colorPalette'));
