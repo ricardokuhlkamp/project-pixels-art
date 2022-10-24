@@ -68,6 +68,22 @@ function pixelByPixel(parameter) {
 
 
 
+function executeStorage() {
+  if (localStorage.getItem('colorPalette')) {
+    let loadColorsList = JSON.parse(localStorage.getItem('colorPalette'));
+    loadStorageColors(loadColorsList);
+  }
+  if (localStorage.getItem('pixelBoard')) {
+    let loadBoardColor = localStorage.getItem('pixelBoard');
+    loadStorageBoard(loadBoardColor);
+  }
+  if (localStorage.getItem('width')) {
+    let loadWidth = localStorage.getItem('width');
+    loadStorageWidth(loadWidth);
+  }
+}
+executeStorage();
+
 
 function removeOldPixels() {
   for (let i = pixels.length - 1; i > -1; i -= 1) {
