@@ -68,6 +68,19 @@ function pixelByPixel(parameter) {
 
 
 
+function verifica() {
+  let number = input.value;
+  if (number < 5) {
+    alert('Board inválido!');
+    createPixels(5);
+  } else if (number > 50) {
+    alert('Board inválido!');
+    createPixels(50);
+  } else {
+    createPixels(number);
+  }
+}
+
 function selectColorPalette(event) {
   const selected = document.getElementsByClassName('selected');
   for (let index = 0; index < selected.length; index += 1) {
