@@ -68,6 +68,16 @@ function pixelByPixel(parameter) {
 
 
 
+function selectColorPalette(event) {
+  const selected = document.getElementsByClassName('selected');
+  for (let index = 0; index < selected.length; index += 1) {
+    selected[index].classList.remove('selected');
+  }
+  event.target.classList.add('selected');
+}
+
+palette.addEventListener('click', selectColorPalette);
+
 function addStorageBoard(key, content) {
   localStorage.setItem(key, content);
 }
