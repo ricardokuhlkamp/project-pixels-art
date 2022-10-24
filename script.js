@@ -66,3 +66,8 @@ function pixelByPixel(parameter) {
   addStorageBoard('boardSize', 5);
 }
 
+
+
+btnRandomColor.addEventListener('click', randomColor)
+btnGenerateBoard.addEventListener('click', CreateAndRemovePixels);
+// marco temporal
