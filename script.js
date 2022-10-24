@@ -66,7 +66,22 @@ function pixelByPixel(parameter) {
   addStorageBoard('boardSize', 5);
 }
 
+function createPixels(parameter) {
+  console.log('parameter: ', parameter);
+  let proportion = parameter;
+  let board = proportion * 43;
+  divPixelBoard.style.width = `${board}px`;
+  pixelByPixel(proportion);
+}
 
+function verificaInicio() {
+  if (!localStorage.getItem('boardSize')) {
+    console.log(localStorage.getItem('boardSize'))
+    let number = 5;
+    createPixels(number);
+  }
+}
+verificaInicio();
 
 function verifica() {
   let number = input.value;
