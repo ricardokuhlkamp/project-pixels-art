@@ -68,6 +68,10 @@ function pixelByPixel(parameter) {
 
 
 
+function addStorageBoard(key, content) {
+  localStorage.setItem(key, content);
+}
+
 function paint(event) {
   const selected = document.getElementsByClassName('selected');
   for (let index = 0; index < selected.length; index += 1) {
