@@ -68,6 +68,17 @@ function pixelByPixel(parameter) {
 
 
 
+function clearBoard() {
+  let divPixel = document.getElementsByClassName('pixel');
+  for (let index = 0; index < divPixel.length; index += 1) {
+    divPixel[index].style.backgroundColor = 'white';
+  }
+  let newBoardPicture = document.querySelector('#pixel-board');
+  addStorageBoard('pixelBoard', newBoardPicture.innerHTML);
+}
+
+btnClear.addEventListener('click', clearBoard)
+
 function loadStorageBoard(parameter) {
   divPixelBoard.innerHTML = parameter;
 }
