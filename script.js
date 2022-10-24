@@ -38,4 +38,31 @@ function randomColor() {
   addStorage('colorPalette', listColor);
 }
 
+function loadStorageColors(parameter) {
+  for (let index = 0; index < (parameter.length); index += 1) {
+    colors[index + 1].style.backgroundColor = parameter[index];
+  }
+}
+
+function pixelByPixel(parameter) {
+  console.log('pixelBypixel(parameter): ', parameter)
+  for (let index = 0; index < parameter; index += 1) {
+    const divPixel = document.createElement('div');
+    divPixelBoard.appendChild(divPixel);
+    divPixel.setAttribute('class', 'pixel');
+    divPixel.style.width = '40px';
+    divPixel.style.height = '40px';
+    for (let i = 0; i < (parameter - 1); i += 1) {
+      const divPixel = document.createElement('div');
+      divPixelBoard.appendChild(divPixel);
+      divPixel.setAttribute('class', 'pixel');
+      divPixel.style.width = '40px';
+      divPixel.style.height = '40px';
+    }
+  }
+  addStorageWidth('width', divPixelBoard.style.width);
+  let newBoardPicture = document.querySelector('#pixel-board');
+  addStorageBoard('pixelBoard', newBoardPicture.innerHTML);
+  addStorageBoard('boardSize', 5);
+}
 
