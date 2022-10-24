@@ -68,6 +68,17 @@ function pixelByPixel(parameter) {
 
 
 
+function paint(event) {
+  const selected = document.getElementsByClassName('selected');
+  for (let index = 0; index < selected.length; index += 1) {
+    event.target.style.backgroundColor = selected[index].style.backgroundColor;
+  }
+  let newBoardPicture = document.querySelector('#pixel-board');
+  addStorageBoard('pixelBoard', newBoardPicture.innerHTML);
+}
+
+divPixelBoard.addEventListener('click', paint);
+
 function clearBoard() {
   let divPixel = document.getElementsByClassName('pixel');
   for (let index = 0; index < divPixel.length; index += 1) {
