@@ -24,3 +24,18 @@ function initialColor() {
 
 initialColor();
 
+
+function randomColor() {
+  const listColor = [];
+  for (let index = 1; index < colors.length; index += 1) {
+    let r = Math.random() * 255;
+    let g = Math.random() * 255;
+    let b = Math.random() * 255;
+    colors[index].style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    let color = colors[index].style.backgroundColor;
+    listColor.push(color);
+  }
+  addStorage('colorPalette', listColor);
+}
+
+
