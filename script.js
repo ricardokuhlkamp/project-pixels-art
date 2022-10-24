@@ -68,6 +68,18 @@ function pixelByPixel(parameter) {
 
 
 
+
+function removeOldPixels() {
+  for (let i = pixels.length - 1; i > -1; i -= 1) {
+    divPixelBoard.removeChild(pixels[i]);
+  }
+  verifica();
+}
+
+function CreateAndRemovePixels() {
+  removeOldPixels();
+}
+
 btnRandomColor.addEventListener('click', randomColor)
 btnGenerateBoard.addEventListener('click', CreateAndRemovePixels);
 // marco temporal
