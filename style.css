@@ -1,5 +1,5 @@
 body {
-  background-color: #222121;
+  background-color: #383838;
 }
 
 .color {
@@ -39,4 +39,9 @@ h1 {
 
 #board-size {
   width: 50px;
+}
+
+#clear-board , #button-random-color , #board-size , #generate-board {
+  font-size: 18px;
+  font-weight: 800;
 }
